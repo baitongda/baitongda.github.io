@@ -4,21 +4,33 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Hello World | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+  <meta name="description" content="title:Laravel 5.2 多用户认证实现Artisan命令
+php artisan make:model Admin –migration
+php artisan make:auth
+php artisan make:controller Admin/AuthController
+php artisan migrate
+php artisan make:controller AdminC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/02/19/hello-world/index.html">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2016/08/23/Laravel-User-Auth/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2016-02-19T06:26:49.269Z">
+<meta property="og:description" content="title:Laravel 5.2 多用户认证实现Artisan命令
+php artisan make:model Admin –migration
+php artisan make:auth
+php artisan make:controller Admin/AuthController
+php artisan migrate
+php artisan make:controller AdminC">
+<meta property="og:updated_time" content="2016-08-23T08:25:11.619Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="title:Laravel 5.2 多用户认证实现Artisan命令
+php artisan make:model Admin –migration
+php artisan make:auth
+php artisan make:controller Admin/AuthController
+php artisan migrate
+php artisan make:controller AdminC">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -200,11 +212,11 @@ Quick">
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Laravel-User-Auth" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/02/19/hello-world/" class="article-date">
-  	<time datetime="2016-02-19T06:26:49.269Z" itemprop="datePublished">2016-02-19</time>
+      <a href="/2016/08/23/Laravel-User-Auth/" class="article-date">
+  	<time datetime="2016-08-23T08:25:11.646Z" itemprop="datePublished">2016-08-23</time>
 </a>
     </div>
   
@@ -213,35 +225,238 @@ Quick">
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Hello World
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-        
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <hr>
+<h2 id="title-Laravel-5-2-多用户认证实现"><a href="#title-Laravel-5-2-多用户认证实现" class="headerlink" title="title:Laravel 5.2 多用户认证实现"></a>title:Laravel 5.2 多用户认证实现</h2><p><strong>Artisan命令</strong></p>
+<p>php artisan make:model Admin –migration</p>
+<p>php artisan make:auth</p>
+<p>php artisan make:controller Admin/AuthController</p>
+<p>php artisan migrate</p>
+<p>php artisan make:controller AdminController</p>
+<p><strong>auth.php</strong></p>
+<p>&lt;?php</p>
+<p>return [</p>
+<pre><code>&apos;defaults&apos; =&gt; [        
+</code></pre><p>​        ‘guard’ =&gt; ‘web’,</p>
+<pre><code>    &apos;passwords&apos; =&gt; &apos;users&apos;,    ],
+
+&apos;guards&apos; =&gt; [
+
+    &apos;web&apos; =&gt; [
+
+        &apos;driver&apos; =&gt; &apos;session&apos;,
+
+        &apos;provider&apos; =&gt; &apos;users&apos;,
+
+    ],
+
+    &apos;admin&apos; =&gt; [
+
+        &apos;driver&apos; =&gt; &apos;session&apos;,
+
+        &apos;provider&apos; =&gt; &apos;admins&apos;,
+
+    ],
+
+    &apos;api&apos; =&gt; [
+
+        &apos;driver&apos; =&gt; &apos;token&apos;, 
+
+        &apos;provider&apos; =&gt; &apos;users&apos;,
+
+    ],
+
+],
+
+&apos;providers&apos; =&gt; [
+
+    &apos;users&apos; =&gt; [ 
+
+        &apos;driver&apos; =&gt; &apos;eloquent&apos;,
+
+        &apos;model&apos; =&gt; App\User::class,
+
+    ],
+
+    &apos;admins&apos; =&gt; [
+
+        &apos;driver&apos; =&gt; &apos;eloquent&apos;, 
+
+        &apos;model&apos; =&gt; App\Admin::class,
+
+    ],
+
+],
+
+&apos;passwords&apos; =&gt; [
+
+    &apos;users&apos; =&gt; [
+
+        &apos;provider&apos; =&gt; &apos;users&apos;,
+
+        &apos;email&apos; =&gt; &apos;auth.emails.password&apos;, 
+
+       &apos;table&apos; =&gt; &apos;password_resets&apos;, 
+
+       &apos;expire&apos; =&gt; 60,
+
+    ],
+
+    &apos;admins&apos; =&gt; [
+
+        &apos;provider&apos; =&gt; &apos;admins&apos;,
+
+        &apos;email&apos; =&gt; &apos;auth.emails.password&apos;,
+
+        &apos;table&apos; =&gt; &apos;admin_password_resets&apos;,
+
+        &apos;expire&apos; =&gt; 60,
+
+    ],
+
+],
+</code></pre><p>];</p>
+<p><strong>routes.php</strong></p>
+<p>Route::group([‘middleware’ =&gt; [‘web’]], function () {</p>
+<pre><code>Route::get(&apos;admin/login&apos;, &apos;Admin\AuthController@getLogin&apos;);
+
+Route::post(&apos;admin/login&apos;, &apos;Admin\AuthController@postLogin&apos;);
+
+Route::get(&apos;admin/register&apos;, &apos;Admin\AuthController@getRegister&apos;);
+
+Route::post(&apos;admin/register&apos;, &apos;Admin\AuthController@postRegister&apos;);
+
+Route::get(&apos;admin&apos;, &apos;AdminController@index&apos;);
+</code></pre><p>});</p>
+<p><strong>Admin.php</strong></p>
+<p>&lt;?php</p>
+<p>namespace App;</p>
+<p>use Illuminate\Foundation\Auth\User as Authenticatable;</p>
+<p>class Admin extends Authenticatable{</p>
+<pre><code>protected $fillable = [
+
+    &apos;name&apos;, &apos;email&apos;, &apos;password&apos;,
+
+];
+
+protected $hidden = [
+
+    &apos;password&apos;, &apos;remember_token&apos;,
+
+];
+</code></pre><p>}</p>
+<p><strong>Admin\AuthController.php:</strong></p>
+<p>&lt;?php</p>
+<p>namespace App\Http\Controllers\Admin;</p>
+<p>use App\Admin;</p>
+<p>use Validator;</p>
+<p>use App\Http\Controllers\Controller;</p>
+<p>use Illuminate\Foundation\Auth\ThrottlesLogins;</p>
+<p>use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;</p>
+<p>class AuthController extends Controller{</p>
+<pre><code>use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+protected $redirectTo = &apos;/admin&apos;;
+
+protected $guard = &apos;admin&apos;;
+
+protected $loginView = &apos;admin.login&apos;;
+
+protected $registerView = &apos;admin.register&apos;;
+
+public function __construct()
+
+{
+
+    $this-&gt;middleware(&apos;guest&apos;, [&apos;except&apos; =&gt; &apos;logout&apos;]);
+
+}
+
+protected function validator(array $data)    {
+
+    return Validator::make($data, [
+
+        &apos;name&apos; =&gt; &apos;required|max:255&apos;,
+
+        &apos;email&apos; =&gt; &apos;required|email|max:255|unique:users&apos;,
+
+        &apos;password&apos; =&gt; &apos;required|confirmed|min:6&apos;,
+
+    ]);
+
+}
+
+protected function create(array $data)    {
+
+    return Admin::create([
+
+        &apos;name&apos; =&gt; $data[&apos;name&apos;],
+
+        &apos;email&apos; =&gt; $data[&apos;email&apos;],
+
+        &apos;password&apos; =&gt; bcrypt($data[&apos;password&apos;]),
+
+    ]);
+
+}
+</code></pre><p>}</p>
+<p><strong>AdminController.php：</strong></p>
+<p>&lt;?php</p>
+<p>namespace App\Http\Controllers;</p>
+<p>use Illuminate\Http\Request;</p>
+<p>use App\Http\Requests;</p>
+<p>use App\Http\Controllers\Controller;</p>
+<p>use Auth;</p>
+<p>class AdminController extends Controller{</p>
+<pre><code>public function __construct()
+
+{
+
+    $this-&gt;middleware(&apos;auth&apos;);
+
+}
+
+public function index()
+
+{
+
+    $admin = Auth::guard(&apos;admin&apos;)-&gt;user();
+
+    return $admin-&gt;name;
+
+}
+</code></pre><p>}</p>
+<p><strong>HomeController.php</strong></p>
+<p>&lt;?php</p>
+<p>namespace App\Http\Controllers;</p>
+<p>use App\Http\Requests;</p>
+<p>use Illuminate\Http\Request;</p>
+<p>use Auth;</p>
+<p>class HomeController extends Controller{</p>
+<pre><code>public function __construct()
+
+{
+
+    $this-&gt;middleware(&apos;auth&apos;);
+
+}
+
+public function index()
+
+{
+
+    $user = Auth::user();
+
+    return $user-&gt;name;
+
+}
+</code></pre><p>}</p>
+<p><strong>视图文件修改</strong></p>
+<p>cp resources/views/auth resources/views/admin</p>
+<p>修改resources/views/admin目录下表单提交地址：</p>
+<p>/login -&gt; /admin/login</p>
+<p>/register -&gt; /admin/register</p>
 
       
     </div>
@@ -251,15 +466,11 @@ Quick">
     
 <nav id="article-nav">
   
-    <a href="/2016/02/19/My-New-Post/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          My New Post
-        
-      </div>
-    </a>
   
+    <a href="/2016/04/26/atom/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Atom的Web开发设置</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
   
 </nav>
 
@@ -292,7 +503,7 @@ Quick">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="hello-world" data-title="Hello World" data-url="http://yoursite.com/2016/02/19/hello-world/"></div>
+	<div class="ds-thread" data-thread-key="Laravel-User-Auth" data-title="" data-url="http://yoursite.com/2016/08/23/Laravel-User-Auth/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

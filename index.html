@@ -198,6 +198,277 @@
 
       <div class="body-wrap">
   
+    <article id="post-Laravel-User-Auth" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/23/Laravel-User-Auth/" class="article-date">
+  	<time datetime="2016-08-23T08:25:11.646Z" itemprop="datePublished">2016-08-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-Laravel-5-2-多用户认证实现"><a href="#title-Laravel-5-2-多用户认证实现" class="headerlink" title="title:Laravel 5.2 多用户认证实现"></a>title:Laravel 5.2 多用户认证实现</h2><p><strong>Artisan命令</strong></p>
+<p>php artisan make:model Admin –migration</p>
+<p>php artisan make:auth</p>
+<p>php artisan make:controller Admin/AuthController</p>
+<p>php artisan migrate</p>
+<p>php artisan make:controller AdminController</p>
+<p><strong>auth.php</strong></p>
+<p>&lt;?php</p>
+<p>return [</p>
+<pre><code>&apos;defaults&apos; =&gt; [        
+</code></pre><p>​        ‘guard’ =&gt; ‘web’,</p>
+<pre><code>    &apos;passwords&apos; =&gt; &apos;users&apos;,    ],
+
+&apos;guards&apos; =&gt; [
+
+    &apos;web&apos; =&gt; [
+
+        &apos;driver&apos; =&gt; &apos;session&apos;,
+
+        &apos;provider&apos; =&gt; &apos;users&apos;,
+
+    ],
+
+    &apos;admin&apos; =&gt; [
+
+        &apos;driver&apos; =&gt; &apos;session&apos;,
+
+        &apos;provider&apos; =&gt; &apos;admins&apos;,
+
+    ],
+
+    &apos;api&apos; =&gt; [
+
+        &apos;driver&apos; =&gt; &apos;token&apos;, 
+
+        &apos;provider&apos; =&gt; &apos;users&apos;,
+
+    ],
+
+],
+
+&apos;providers&apos; =&gt; [
+
+    &apos;users&apos; =&gt; [ 
+
+        &apos;driver&apos; =&gt; &apos;eloquent&apos;,
+
+        &apos;model&apos; =&gt; App\User::class,
+
+    ],
+
+    &apos;admins&apos; =&gt; [
+
+        &apos;driver&apos; =&gt; &apos;eloquent&apos;, 
+
+        &apos;model&apos; =&gt; App\Admin::class,
+
+    ],
+
+],
+
+&apos;passwords&apos; =&gt; [
+
+    &apos;users&apos; =&gt; [
+
+        &apos;provider&apos; =&gt; &apos;users&apos;,
+
+        &apos;email&apos; =&gt; &apos;auth.emails.password&apos;, 
+
+       &apos;table&apos; =&gt; &apos;password_resets&apos;, 
+
+       &apos;expire&apos; =&gt; 60,
+
+    ],
+
+    &apos;admins&apos; =&gt; [
+
+        &apos;provider&apos; =&gt; &apos;admins&apos;,
+
+        &apos;email&apos; =&gt; &apos;auth.emails.password&apos;,
+
+        &apos;table&apos; =&gt; &apos;admin_password_resets&apos;,
+
+        &apos;expire&apos; =&gt; 60,
+
+    ],
+
+],
+</code></pre><p>];</p>
+<p><strong>routes.php</strong></p>
+<p>Route::group([‘middleware’ =&gt; [‘web’]], function () {</p>
+<pre><code>Route::get(&apos;admin/login&apos;, &apos;Admin\AuthController@getLogin&apos;);
+
+Route::post(&apos;admin/login&apos;, &apos;Admin\AuthController@postLogin&apos;);
+
+Route::get(&apos;admin/register&apos;, &apos;Admin\AuthController@getRegister&apos;);
+
+Route::post(&apos;admin/register&apos;, &apos;Admin\AuthController@postRegister&apos;);
+
+Route::get(&apos;admin&apos;, &apos;AdminController@index&apos;);
+</code></pre><p>});</p>
+<p><strong>Admin.php</strong></p>
+<p>&lt;?php</p>
+<p>namespace App;</p>
+<p>use Illuminate\Foundation\Auth\User as Authenticatable;</p>
+<p>class Admin extends Authenticatable{</p>
+<pre><code>protected $fillable = [
+
+    &apos;name&apos;, &apos;email&apos;, &apos;password&apos;,
+
+];
+
+protected $hidden = [
+
+    &apos;password&apos;, &apos;remember_token&apos;,
+
+];
+</code></pre><p>}</p>
+<p><strong>Admin\AuthController.php:</strong></p>
+<p>&lt;?php</p>
+<p>namespace App\Http\Controllers\Admin;</p>
+<p>use App\Admin;</p>
+<p>use Validator;</p>
+<p>use App\Http\Controllers\Controller;</p>
+<p>use Illuminate\Foundation\Auth\ThrottlesLogins;</p>
+<p>use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;</p>
+<p>class AuthController extends Controller{</p>
+<pre><code>use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+protected $redirectTo = &apos;/admin&apos;;
+
+protected $guard = &apos;admin&apos;;
+
+protected $loginView = &apos;admin.login&apos;;
+
+protected $registerView = &apos;admin.register&apos;;
+
+public function __construct()
+
+{
+
+    $this-&gt;middleware(&apos;guest&apos;, [&apos;except&apos; =&gt; &apos;logout&apos;]);
+
+}
+
+protected function validator(array $data)    {
+
+    return Validator::make($data, [
+
+        &apos;name&apos; =&gt; &apos;required|max:255&apos;,
+
+        &apos;email&apos; =&gt; &apos;required|email|max:255|unique:users&apos;,
+
+        &apos;password&apos; =&gt; &apos;required|confirmed|min:6&apos;,
+
+    ]);
+
+}
+
+protected function create(array $data)    {
+
+    return Admin::create([
+
+        &apos;name&apos; =&gt; $data[&apos;name&apos;],
+
+        &apos;email&apos; =&gt; $data[&apos;email&apos;],
+
+        &apos;password&apos; =&gt; bcrypt($data[&apos;password&apos;]),
+
+    ]);
+
+}
+</code></pre><p>}</p>
+<p><strong>AdminController.php：</strong></p>
+<p>&lt;?php</p>
+<p>namespace App\Http\Controllers;</p>
+<p>use Illuminate\Http\Request;</p>
+<p>use App\Http\Requests;</p>
+<p>use App\Http\Controllers\Controller;</p>
+<p>use Auth;</p>
+<p>class AdminController extends Controller{</p>
+<pre><code>public function __construct()
+
+{
+
+    $this-&gt;middleware(&apos;auth&apos;);
+
+}
+
+public function index()
+
+{
+
+    $admin = Auth::guard(&apos;admin&apos;)-&gt;user();
+
+    return $admin-&gt;name;
+
+}
+</code></pre><p>}</p>
+<p><strong>HomeController.php</strong></p>
+<p>&lt;?php</p>
+<p>namespace App\Http\Controllers;</p>
+<p>use App\Http\Requests;</p>
+<p>use Illuminate\Http\Request;</p>
+<p>use Auth;</p>
+<p>class HomeController extends Controller{</p>
+<pre><code>public function __construct()
+
+{
+
+    $this-&gt;middleware(&apos;auth&apos;);
+
+}
+
+public function index()
+
+{
+
+    $user = Auth::user();
+
+    return $user-&gt;name;
+
+}
+</code></pre><p>}</p>
+<p><strong>视图文件修改</strong></p>
+<p>cp resources/views/auth resources/views/admin</p>
+<p>修改resources/views/admin目录下表单提交地址：</p>
+<p>/login -&gt; /admin/login</p>
+<p>/register -&gt; /admin/register</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-atom" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -475,7 +746,7 @@
   
     <div class="article-meta">
       <a href="/2016/02/19/hello-world/" class="article-date">
-  	<time datetime="2016-02-19T06:26:49.000Z" itemprop="datePublished">2016-02-19</time>
+  	<time datetime="2016-02-19T06:26:49.269Z" itemprop="datePublished">2016-02-19</time>
 </a>
     </div>
   
